@@ -753,25 +753,33 @@
         <p class="section-subtitle">Descubre tu nivel en 30 minutos (sin compromiso)</p>
         
         <div class="form-container">
-            <form onsubmit="handleSubmit(event)">
+            <div data-fs-success style="background: #d4edda; color: #155724; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; display: none; text-align: center;">
+                ¡Perfecto! Recibimos tu solicitud. Te contactaremos en menos de 2 horas. 🎉
+            </div>
+            <div data-fs-error style="background: #f8d7da; color: #721c24; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; display: none;"></div>
+
+            <form id="registro-form">
                 <div class="form-group">
                     <label for="name">Nombre Completo</label>
-                    <input type="text" id="name" name="name" required placeholder="Tu nombre">
+                    <input type="text" id="name" name="name" required placeholder="Tu nombre" data-fs-field>
+                    <span data-fs-error="name" style="color: #721c24; font-size: 0.85em; display: none;"></span>
                 </div>
 
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required placeholder="eledlengua@gmail.com">
+                    <input type="email" id="email" name="email" required placeholder="eledlengua@gmail.com" data-fs-field>
+                    <span data-fs-error="email" style="color: #721c24; font-size: 0.85em; display: none;"></span>
                 </div>
 
                 <div class="form-group">
                     <label for="phone">WhatsApp (con código de país)</label>
-                    <input type="tel" id="phone" name="phone" required placeholder="+50 7639 05870">
+                    <input type="tel" id="phone" name="phone" required placeholder="+50 7639 05870" data-fs-field>
+                    <span data-fs-error="phone" style="color: #721c24; font-size: 0.85em; display: none;"></span>
                 </div>
 
                 <div class="form-group">
                     <label for="level">¿Cuál es tu nivel actual?</label>
-                    <select id="level" name="level" required>
+                    <select id="level" name="level" required data-fs-field>
                         <option value="">Selecciona...</option>
                         <option value="principiante">Principiante (No sé nada)</option>
                         <option value="basico">Básico (Algunas palabras)</option>
@@ -782,7 +790,7 @@
 
                 <div class="form-group">
                     <label for="goal">¿Cuál es tu objetivo?</label>
-                    <select id="goal" name="goal" required>
+                    <select id="goal" name="goal" required data-fs-field>
                         <option value="">Selecciona...</option>
                         <option value="conversacion">Hablar fluidamente</option>
                         <option value="trabajo">Mejorar en el trabajo</option>
@@ -792,7 +800,7 @@
                     </select>
                 </div>
 
-                <button type="submit" class="form-submit">
+                <button type="submit" class="form-submit" data-fs-submit-btn>
                     Agendar Mi Clase Gratis →
                 </button>
 
@@ -857,27 +865,12 @@
             element.classList.toggle('active');
         }
 
-        function handleSubmit(event) {
-            event.preventDefault();
-            
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const phone = document.getElementById('phone').value;
-            const level = document.getElementById('level').value;
-            const goal = document.getElementById('goal').value;
+        window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+        formspree('initForm', { formElement: '#registro-form', formId: 'xkoprdyp' });
+    </script>
+    <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 
-            // Aquí integrarías con tu sistema (Zapier, Make, etc.)
-            // Por ahora, simular confirmación
-            
-            alert(`¡Perfecto ${name}! 🎉\n\nTu solicitud fue enviada. Te contactaremos por WhatsApp en menos de 2 horas.\n\nMientras tanto, síguenos en Instagram: @linguaele`);
-            
-            // Limpiar formulario
-            document.querySelector('form').reset();
-
-            // En producción, enviar datos a tu backend
-            console.log({name, email, phone, level, goal});
-        }
-
+    <script>
         // Scroll suave en nav links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
